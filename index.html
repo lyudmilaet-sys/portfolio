@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liudmyla Khlystun — UX/UI Designer</title>
+    <meta
+      name="description"
+      content="UX/UI Designer та AI UX/UI Engineer: перетворюю складну інформацію на зрозумілі цифрові продукти."
+    />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="site-header__name" href="/">Liudmyla Khlystun</a>
+
+      <nav class="site-nav" aria-label="Основна навігація">
+        <a href="#about">About</a>
+        <a href="#works">Works</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
+
+      <div class="lang-switch" role="group" aria-label="Мова сайту">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero__text">
+          <h1 id="hero-title" class="hero__title">Роблю складне зрозумілим — через дизайн і AI</h1>
+          <p class="hero__lead">
+            UX/UI Designer та AI UX/UI Engineer, яка завдяки досвіду викладання перетворює складну
+            інформацію на зрозумілі цифрові продукти — на перетині дизайну, технологій та AI.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="#works">Подивитись кейси</a>
+            <a class="button" href="/cv.pdf" download>Завантажити CV</a>
+          </div>
+        </div>
+
+        <!-- Місце для професійного фото: замінити на <img src="/photo.jpg" alt="..."> -->
+        <div class="hero__photo" role="img" aria-label="Фото Liudmyla Khlystun"></div>
+      </section>
+    </main>
+  </body>
+</html>
