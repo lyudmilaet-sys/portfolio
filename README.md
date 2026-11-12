@@ -3,7 +3,7 @@
 Сайт-портфоліо UX/UI Designer та AI UX/UI Engineer. План сайту — [docs/plan.md](docs/plan.md).
 Дизайн — Figma, файл «HW-1».
 
-Сайт: https://portfolio-chi-three-a9qegpzmjo.vercel.app/
+Сайт: https://liudmyla-khlystun.vercel.app/
 
 ## Стек
 
