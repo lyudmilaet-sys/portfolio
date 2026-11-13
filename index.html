@@ -6,7 +6,7 @@
     <title>Liudmyla Khlystun — UX/UI Designer</title>
     <meta
       name="description"
-      content="UX/UI Designer та AI UX/UI Engineer: перетворюю складну інформацію на зрозумілі цифрові продукти."
+      content="UX/UI Designer та AI UX/UI Engineer з досвідом викладання: перетворюю складну інформацію на інтуїтивні цифрові продукти."
     />
     <script type="module" src="/src/main.js"></script>
   </head>
@@ -28,21 +28,70 @@
     </header>
 
     <main>
+      <!-- Перший екран, варіант B: акцент на кейсах + фото + шлях «викладання → UX/UI → AI» -->
       <section class="hero container" aria-labelledby="hero-title">
-        <div class="hero__text">
-          <h1 id="hero-title" class="hero__title">Роблю складне зрозумілим — через дизайн і AI</h1>
-          <p class="hero__lead">
-            UX/UI Designer та AI UX/UI Engineer, яка завдяки досвіду викладання перетворює складну
-            інформацію на зрозумілі цифрові продукти — на перетині дизайну, технологій та AI.
-          </p>
-          <div class="hero__actions">
-            <a class="button" href="#works">Подивитись кейси</a>
-            <a class="button" href="/cv.pdf" download>Завантажити CV</a>
+        <div class="hero__intro">
+          <div class="hero__text">
+            <h1 id="hero-title" class="hero__title">
+              Роблю складне зрозумілим&nbsp;— через дизайн та&nbsp;AI.
+            </h1>
+
+            <p class="hero__lead">
+              UX/UI Designer та AI UX/UI Engineer з досвідом викладання, яка перетворює складну
+              інформацію на інтуїтивні цифрові продукти — на перетині технологій, дизайну та AI.
+            </p>
+
+            <div class="hero__actions">
+              <a class="button" href="#works">Подивитись кейси</a>
+              <a class="button" href="/cv.pdf" download>Завантажити CV</a>
+            </div>
           </div>
+
+          <figure class="hero__figure">
+            <!-- Місце для професійного фото: замінити на <img class="hero__photo" src="/photo.jpg" alt="Liudmyla Khlystun"> -->
+            <div class="hero__photo" role="img" aria-label="Фото Liudmyla Khlystun"></div>
+            <figcaption class="hero__path">
+              <span>20 років викладання</span>
+              <span class="hero__arrow" aria-hidden="true">→</span>
+              <span>UX/UI</span>
+              <span class="hero__arrow" aria-hidden="true">→</span>
+              <span>AI</span>
+            </figcaption>
+          </figure>
         </div>
 
-        <!-- Місце для професійного фото: замінити на <img src="/photo.jpg" alt="..."> -->
-        <div class="hero__photo" role="img" aria-label="Фото Liudmyla Khlystun"></div>
+        <!-- Кейси прямо на першому екрані. Сторінки кейсів ще не зроблені, тому посилання поки ведуть на #works -->
+        <ul class="hero__cases" id="works" aria-label="Вибрані роботи">
+          <li class="case-card case-card--featured">
+            <a class="case-card__link" href="#works">
+              <div class="case-card__image" aria-hidden="true"></div>
+              <div class="case-card__meta">
+                <h2 class="case-card__title">Old Lion | Book Mobile App</h2>
+                <p class="case-card__info">
+                  Мобільний e-commerce застосунок · Видавництво Старого Лева · Жовтень – листопад 2026
+                </p>
+              </div>
+            </a>
+          </li>
+          <li class="case-card">
+            <a class="case-card__link" href="#works">
+              <div class="case-card__image" aria-hidden="true"></div>
+              <div class="case-card__meta">
+                <h2 class="case-card__title">HealthMate</h2>
+                <p class="case-card__info">Веб-сервіс для здоров’я · Липень 2026</p>
+              </div>
+            </a>
+          </li>
+          <li class="case-card">
+            <a class="case-card__link" href="#works">
+              <div class="case-card__image" aria-hidden="true"></div>
+              <div class="case-card__meta">
+                <h2 class="case-card__title">Fluentia</h2>
+                <p class="case-card__info">Застосунок для вивчення мов · Серпень 2026</p>
+              </div>
+            </a>
+          </li>
+        </ul>
       </section>
     </main>
   </body>

@@ -2,6 +2,7 @@
 :root {
   --color-bg: #ffffff;
   --color-text: #000000;
+  --color-muted: #5f5959; /* другорядний текст, контраст 7:1 на білому */
   --color-placeholder: #c9c1c1;
   --color-on-placeholder: #ffffff;
 
@@ -41,7 +42,7 @@ a {
   display: flex;
   align-items: center;
   gap: 24px;
-  padding-top: 118px;
+  padding-top: 40px;
   font-weight: 500;
 }
 
@@ -84,35 +85,61 @@ a {
   text-underline-offset: 4px;
 }
 
-/* ---------- Перший екран ---------- */
+/* ---------- Перший екран (варіант B: кейси одразу видно) ---------- */
 .hero {
+  padding-top: 104px; /* відступ від хедера */
+  padding-bottom: 120px;
+}
+
+.hero__intro {
   display: grid;
-  grid-template-columns: 413px 522px;
-  justify-content: space-between;
-  align-items: start;
-  padding-top: 117px;
-  padding-bottom: 96px;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 96px;
+  align-items: stretch;
+}
+
+/* Колонка тексту тягнеться на висоту фото, кнопки — внизу, на одній лінії з фото */
+.hero__text {
+  display: flex;
+  flex-direction: column;
 }
 
 .hero__title {
   margin: 0;
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Шлях «20 років викладання → UX/UI → AI» — підпис під фото */
+.hero__path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.hero__arrow {
+  color: var(--color-muted);
 }
 
 .hero__lead {
-  margin: 52px 0 0;
-  max-width: 408px;
-  font-size: 24px;
+  margin: 32px 0 0;
+  max-width: 640px;
+  font-size: 20px;
   line-height: 1.5;
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 21px;
-  margin-top: 51px;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 48px; /* мінімальний відступ від тексту */
 }
 
 .button {
@@ -140,11 +167,66 @@ a {
   outline-offset: 3px;
 }
 
+/* Фото + підпис тягнуться на висоту текстової колонки:
+   верх фото — по заголовку, низ підпису — по кнопках */
+.hero__figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 .hero__photo {
-  width: 522px;
-  height: 543px;
+  flex: 1;
+  width: 100%;
+  min-height: 360px;
+  object-fit: cover;
   border-radius: var(--radius-lg);
   background: var(--color-placeholder);
+}
+
+/* ---------- Картки кейсів ---------- */
+.hero__cases {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Old Lion — найбільша, перша */
+  gap: 32px;
+  margin: 72px 0 0; /* відступ від першого блоку до кейсів; назви кейсів видно на екрані 900 px */
+  padding: 0;
+  list-style: none;
+  scroll-margin-top: 40px;
+}
+
+.case-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.case-card__image {
+  height: 160px;
+  border-radius: 24px;
+  background: var(--color-placeholder);
+  transition: transform 0.2s ease;
+}
+
+.case-card__link:hover .case-card__image {
+  transform: translateY(-4px);
+}
+
+.case-card__meta {
+  padding-top: 20px;
+}
+
+.case-card__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.case-card__info {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-muted);
 }
 
 /* ---------- Адаптив ---------- */
@@ -153,22 +235,33 @@ a {
     margin-left: 24px;
   }
 
-  .hero {
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+  .hero__intro {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 56px;
   }
 
-  .hero__photo {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 522 / 543;
+  .hero__title {
+    font-size: 44px;
+  }
+
+  /* Old Lion на всю ширину, два інші кейси — під ним */
+  .hero__cases {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-card--featured {
+    grid-column: 1 / -1;
+  }
+
+  .case-card--featured .case-card__image {
+    height: 260px;
   }
 }
 
 @media (max-width: 760px) {
   .site-header {
     flex-wrap: wrap;
-    padding-top: 32px;
+    padding-top: 24px;
     row-gap: 16px;
   }
 
@@ -186,26 +279,61 @@ a {
   }
 
   .hero {
+    padding-top: 64px;
+    padding-bottom: 80px;
+  }
+
+  /* На телефоні фото — над текстом, невелике */
+  .hero__intro {
     grid-template-columns: 1fr;
-    padding-top: 48px;
     gap: 40px;
+  }
+
+  /* На телефоні фото з підписом — над заголовком */
+  .hero__figure {
+    order: -1;
+  }
+
+  .hero__photo {
+    flex: none;
+    align-self: start;
+    width: 200px;
+    min-height: 0;
+    aspect-ratio: 300 / 360;
+    border-radius: 24px;
   }
 
   .hero__title {
     font-size: 36px;
   }
 
+  .hero__path {
+    font-size: 16px;
+    margin-top: 16px;
+  }
+
   .hero__lead {
     margin-top: 24px;
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .hero__actions {
-    margin-top: 32px;
+    padding-top: 40px;
   }
 
   .button {
     flex: 1 1 180px;
     min-width: 0;
+  }
+
+  .hero__cases {
+    grid-template-columns: 1fr;
+    margin-top: 80px;
+    gap: 48px;
+  }
+
+  .case-card__image,
+  .case-card--featured .case-card__image {
+    height: 220px;
   }
 }
