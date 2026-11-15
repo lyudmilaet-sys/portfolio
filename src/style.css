@@ -8,8 +8,9 @@
 
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --container: 1067px; /* ширина контенту на фреймі 1440 */
-  --gutter: 16px;
+  --container: 1280px; /* максимальна ширина контенту: на 1440 px поля по 80 px */
+  /* Поле збоку: 16 px до ширини 1100, далі плавно росте до 80 px на 1440 */
+  --gutter: clamp(16px, 18.82vw - 191px, 80px);
   --radius-lg: 32px;
 }
 
@@ -93,7 +94,7 @@ a {
 
 .hero__intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) 420px;
   gap: 96px;
   align-items: stretch;
 }
@@ -106,16 +107,19 @@ a {
 
 .hero__title {
   margin: 0;
+  max-width: 660px; /* рядки: «Роблю складне / зрозумілим — через / дизайн та AI.» */
   font-size: 56px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
-/* Шлях «20 років викладання → UX/UI → AI» — підпис під фото */
+/* Шлях «20 років викладання → UX/UI → AI» — підпис під фото.
+   На комп'ютері розтягнутий на всю ширину фото, як міні-таймлайн. */
 .hero__path {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   gap: 8px 12px;
   margin: 24px 0 0;
@@ -178,7 +182,7 @@ a {
 .hero__photo {
   flex: 1;
   width: 100%;
-  min-height: 360px;
+  min-height: 380px; /* майже квадрат 420×380 — портрет не обріжеться надто сильно */
   object-fit: cover;
   border-radius: var(--radius-lg);
   background: var(--color-placeholder);
@@ -233,6 +237,11 @@ a {
 @media (max-width: 1100px) {
   .lang-switch {
     margin-left: 24px;
+  }
+
+  /* Фото вужче — підпис переноситься, тому без розтягування */
+  .hero__path {
+    justify-content: flex-start;
   }
 
   .hero__intro {
