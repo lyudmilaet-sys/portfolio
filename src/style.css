@@ -1,10 +1,15 @@
-/* Токени з макету Figma «HW-1 / Desktop - 1» */
+/* Палітра «Мокко» (та сама, що в Figma «HW-1», колекція змінних Mocha) */
 :root {
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-muted: #5f5959; /* другорядний текст, контраст 7:1 на білому */
-  --color-placeholder: #c9c1c1;
-  --color-on-placeholder: #ffffff;
+  --color-bg: #f6f1ec; /* кремовий фон */
+  --color-surface: #e8dcd2; /* картки, заглушки зображень, передня стінка папки */
+  --color-surface-strong: #d9c6b8; /* задня стінка кишені */
+  --color-paper: #fbf8f5; /* аркуш у кишені — місце для мокапу */
+  --color-decor: #a47864; /* мокко: лише декор (стрілки), не для тексту */
+  --color-primary: #7a5543; /* темний мокко: кнопки, контур */
+  --color-primary-hover: #5f4033;
+  --color-on-primary: #ffffff;
+  --color-text: #2b211c; /* контраст 14:1 на фоні */
+  --color-muted: #6b5a50; /* другорядний текст, контраст 5.8:1 на фоні */
 
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -73,11 +78,11 @@ a {
   border: 0;
   padding: 0;
   cursor: pointer;
-  opacity: 0.45;
+  color: var(--color-muted);
 }
 
 .lang-switch button[aria-pressed='true'] {
-  opacity: 1;
+  color: var(--color-text);
 }
 
 .site-nav a:hover,
@@ -128,7 +133,7 @@ a {
 }
 
 .hero__arrow {
-  color: var(--color-muted);
+  color: var(--color-decor);
 }
 
 .hero__lead {
@@ -153,17 +158,30 @@ a {
   min-width: 196px;
   height: 48px;
   padding: 14px 24px;
+  border: 1.5px solid var(--color-primary);
   border-radius: var(--radius-lg);
-  background: var(--color-placeholder);
-  color: var(--color-on-placeholder);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
-  transition: filter 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .button:hover {
-  filter: brightness(0.92);
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+/* Другорядна кнопка — контур мокко */
+.button--secondary {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--secondary:hover {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
 }
 
 :is(a, button):focus-visible {
@@ -180,12 +198,14 @@ a {
 }
 
 .hero__photo {
-  flex: 1;
+  flex: 1 1 0px; /* висоту задає колонка, а не пропорції самого фото */
   width: 100%;
   min-height: 380px; /* майже квадрат 420×380 — портрет не обріжеться надто сильно */
+  display: block;
   object-fit: cover;
+  object-position: 50% 30%; /* обличчя в кадрі, обрізається переважно низ */
   border-radius: var(--radius-lg);
-  background: var(--color-placeholder);
+  background: var(--color-surface);
 }
 
 /* ---------- Картки кейсів ---------- */
@@ -205,15 +225,50 @@ a {
   height: 100%;
 }
 
+/* Місце для кейсу у вигляді кишені:
+   сам блок — задня стінка, ::before — аркуш (місце для мокапу), ::after — кишеня спереду.
+   Пізніше мокап кейсу ляже на місце аркуша. */
 .case-card__image {
+  position: relative;
   height: 160px;
-  border-radius: 24px;
-  background: var(--color-placeholder);
+  border-radius: 20px;
+  background: var(--color-surface-strong);
+  overflow: hidden;
   transition: transform 0.2s ease;
 }
 
+.case-card__image::before {
+  content: '';
+  position: absolute;
+  inset: 14px 12% 18px;
+  border-radius: 10px;
+  background: var(--color-paper);
+  transition: transform 0.25s ease;
+}
+
+.case-card__image::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 55%;
+  border-radius: 44px 44px 20px 20px; /* заокруглений край кишені */
+  background: var(--color-surface);
+}
+
+/* Наведення: картка трохи піднімається, аркуш висувається з кишені */
 .case-card__link:hover .case-card__image {
   transform: translateY(-4px);
+}
+
+.case-card__link:hover .case-card__image::before {
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card__image,
+  .case-card__image::before {
+    transition: none;
+  }
 }
 
 .case-card__meta {
@@ -307,6 +362,7 @@ a {
     flex: none;
     align-self: start;
     width: 200px;
+    height: auto;
     min-height: 0;
     aspect-ratio: 300 / 360;
     border-radius: 24px;
