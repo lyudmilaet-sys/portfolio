@@ -1,22 +1,66 @@
-/* Палітра «Мокко» (та сама, що в Figma «HW-1», колекція змінних Mocha) */
+/* =====================================================================
+   Токени сайту-портфоліо (мінімальний набір, палітра «Мокко»).
+   Назви — за роллю, а не за кольором.
+   ===================================================================== */
 :root {
-  --color-bg: #f6f1ec; /* кремовий фон */
-  --color-surface: #e8dcd2; /* картки, заглушки зображень, передня стінка папки */
-  --color-surface-strong: #d9c6b8; /* задня стінка кишені */
-  --color-paper: #fbf8f5; /* аркуш у кишені — місце для мокапу */
-  --color-decor: #a47864; /* мокко: лише декор (стрілки), не для тексту */
-  --color-primary: #7a5543; /* темний мокко: кнопки, контур */
-  --color-primary-hover: #5f4033;
-  --color-on-primary: #ffffff;
-  --color-text: #2b211c; /* контраст 14:1 на фоні */
-  --color-muted: #6b5a50; /* другорядний текст, контраст 5.8:1 на фоні */
+  /* ---------- Кольори (7) ---------- */
+  --color-canvas: #f6f1ec; /* фон сторінки; текст на акцентній кнопці */
+  --color-surface: #e8dcd2; /* поверхні: кишеня, фон фото, наведення на кнопку без заливки */
+  --color-line: #d9c6b8; /* ЛИШЕ декор: розділювачі, рамки карток, задня стінка кишені */
+  --color-accent: #7a5543; /* головна кнопка, посилання, стрілки */
+  --color-text: #2b211c; /* основний текст; наведення на головну кнопку. 14:1 до canvas */
+  --color-text-muted: #6b5a50; /* другорядний текст; рамка кнопок і полів без заливки. 5.8:1 */
+  --color-danger: #a8174b; /* помилки; відтінок 338° проти 20° в акценту. 6.5:1 */
 
+  /* ---------- Типографіка (8 розмірів) ---------- */
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
+  --font-caption-size: 14px; /* опис кейсу */
+  --font-caption-leading: 1.5;
+  --font-body-size: 18px; /* підпис під фото, текст на телефоні */
+  --font-body-leading: 1.5;
+  --font-lead-size: 20px; /* основний текст, назва кейсу (600) */
+  --font-lead-leading: 1.5;
+  --font-heading-size: 32px; /* ім'я в хедері, заголовки розділів, головний заголовок на телефоні */
+  --font-heading-leading: 1.2;
+  --font-display-size: 56px; /* головний заголовок */
+  --font-display-leading: 1.15;
+  --font-display-tracking: -0.01em;
+  --font-display-weight: 600;
+  /* додаткові ролі */
+  --font-display-tablet-size: 44px; /* головний заголовок на планшеті */
+  --font-nav-size: 24px; /* меню, EN / DE, ім'я на телефоні */
+  --font-nav-leading: 1.2;
+  --font-button-size: 16px; /* кнопки; підпис під фото на телефоні */
+  --font-button-leading: 1;
+
+  /* ---------- Відступи: лише 8, 12, 16, 24, 32 ---------- */
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Секційні відступи — поза шкалою, лише для ритму між великими блоками */
+  --section-40: 40px;
+  --section-48: 48px;
+  --section-64: 64px;
+  --section-80: 80px;
+  --section-96: 96px;
+  --section-120: 120px;
+
+  /* ---------- Радіуси (2) ---------- */
+  --radius-control: 999px; /* кнопки, поля — «пігулка» */
+  --radius-card: 24px; /* картки кейсів, фото */
+
+  /* ---------- Пропорції картинок (2) ---------- */
+  --ratio-cover: 2 / 1; /* обкладинка кейсу */
+  --ratio-portrait: 5 / 6; /* портрет */
+
+  /* ---------- Сітка ---------- */
   --container: 1280px; /* максимальна ширина контенту: на 1440 px поля по 80 px */
   /* Поле збоку: 16 px до ширини 1100, далі плавно росте до 80 px на 1440 */
-  --gutter: clamp(16px, 18.82vw - 191px, 80px);
-  --radius-lg: 32px;
+  --gutter: clamp(var(--space-16), 18.82vw - 191px, var(--section-80));
 }
 
 *,
@@ -27,7 +71,7 @@
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background: var(--color-canvas);
   color: var(--color-text);
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
@@ -47,38 +91,40 @@ a {
 .site-header {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding-top: 40px;
+  gap: var(--space-24);
+  padding-top: var(--section-40);
   font-weight: 500;
 }
 
 .site-header__name {
-  font-size: 32px;
+  font-size: var(--font-heading-size);
+  line-height: var(--font-heading-leading);
   margin-right: auto;
 }
 
 .site-nav {
   display: flex;
-  gap: 37px;
-  font-size: 24px;
+  gap: var(--section-40);
+  font-size: var(--font-nav-size);
+  line-height: var(--font-nav-leading);
 }
 
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 88px;
-  font-size: 24px;
+  gap: var(--space-8);
+  margin-left: var(--section-96);
+  font-size: var(--font-nav-size);
+  line-height: var(--font-nav-leading);
 }
 
 .lang-switch button {
   font: inherit;
-  color: inherit;
   background: none;
   border: 0;
   padding: 0;
   cursor: pointer;
-  color: var(--color-muted);
+  color: var(--color-text-muted);
 }
 
 .lang-switch button[aria-pressed='true'] {
@@ -91,20 +137,20 @@ a {
   text-underline-offset: 4px;
 }
 
-/* ---------- Перший екран (варіант B: кейси одразу видно) ---------- */
+/* ---------- Перший екран ---------- */
 .hero {
-  padding-top: 104px; /* відступ від хедера */
-  padding-bottom: 120px;
+  padding-top: var(--section-64); /* відступ від хедера; назви кейсів видно на екрані 900 px */
+  padding-bottom: var(--section-120);
 }
 
 .hero__intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 420px;
-  gap: 96px;
+  grid-template-columns: minmax(0, 1fr) 320px; /* фото 320 × 384 (5:6) */
+  gap: var(--section-96);
   align-items: stretch;
 }
 
-/* Колонка тексту тягнеться на висоту фото, кнопки — внизу, на одній лінії з фото */
+/* Колонка тексту тягнеться на висоту фото з підписом, кнопки — внизу, на одній лінії з підписом */
 .hero__text {
   display: flex;
   flex-direction: column;
@@ -113,10 +159,10 @@ a {
 .hero__title {
   margin: 0;
   max-width: 660px; /* рядки: «Роблю складне / зрозумілим — через / дизайн та AI.» */
-  font-size: 56px;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: var(--font-display-size);
+  font-weight: var(--font-display-weight);
+  line-height: var(--font-display-leading);
+  letter-spacing: var(--font-display-tracking);
 }
 
 /* Шлях «20 років викладання → UX/UI → AI» — підпис під фото.
@@ -126,29 +172,30 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 8px 12px;
-  margin: 24px 0 0;
-  font-size: 18px;
+  gap: var(--space-8); /* 8, щоб підпис вміщався в один рядок під фото 320 px */
+  margin: var(--space-24) 0 0;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-leading);
   font-weight: 500;
 }
 
 .hero__arrow {
-  color: var(--color-decor);
+  color: var(--color-accent);
 }
 
 .hero__lead {
-  margin: 32px 0 0;
+  margin: var(--space-32) 0 0;
   max-width: 640px;
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: var(--font-lead-size);
+  line-height: var(--font-lead-leading);
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: var(--space-24);
   margin-top: auto;
-  padding-top: 48px; /* мінімальний відступ від тексту */
+  padding-top: var(--section-48); /* мінімальний відступ від тексту */
 }
 
 .button {
@@ -157,40 +204,40 @@ a {
   justify-content: center;
   min-width: 196px;
   height: 48px;
-  padding: 14px 24px;
-  border: 1.5px solid var(--color-primary);
-  border-radius: var(--radius-lg);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font-size: 16px;
+  padding: 0 var(--space-24);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+  color: var(--color-canvas);
+  font-size: var(--font-button-size);
+  line-height: var(--font-button-leading);
   font-weight: 500;
   white-space: nowrap;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .button:hover {
-  background: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
+  background: var(--color-text);
+  border-color: var(--color-text);
 }
 
-/* Другорядна кнопка — контур мокко */
+/* Кнопка без заливки: рамка — text-muted (5.8:1 до фону), текст — accent */
 .button--secondary {
   background: transparent;
-  color: var(--color-primary);
+  border-color: var(--color-text-muted);
+  color: var(--color-accent);
 }
 
 .button--secondary:hover {
   background: var(--color-surface);
-  border-color: var(--color-primary);
+  border-color: var(--color-text-muted);
 }
 
 :is(a, button):focus-visible {
   outline: 2px solid var(--color-text);
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
 
-/* Фото + підпис тягнуться на висоту текстової колонки:
-   верх фото — по заголовку, низ підпису — по кнопках */
 .hero__figure {
   display: flex;
   flex-direction: column;
@@ -198,25 +245,25 @@ a {
 }
 
 .hero__photo {
-  flex: 1 1 0px; /* висоту задає колонка, а не пропорції самого фото */
-  width: 100%;
-  min-height: 380px; /* майже квадрат 420×380 — портрет не обріжеться надто сильно */
   display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ratio-portrait);
   object-fit: cover;
-  object-position: 50% 30%; /* обличчя в кадрі, обрізається переважно низ */
-  border-radius: var(--radius-lg);
+  object-position: 50% 30%; /* обличчя в кадрі */
+  border-radius: var(--radius-card);
   background: var(--color-surface);
 }
 
 /* ---------- Картки кейсів ---------- */
 .hero__cases {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr; /* Old Lion — найбільша, перша */
-  gap: 32px;
-  margin: 72px 0 0; /* відступ від першого блоку до кейсів; назви кейсів видно на екрані 900 px */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* однакова ширина; Old Lion виділяється тим, що перший */
+  gap: var(--space-32);
+  margin: var(--section-48) 0 0;
   padding: 0;
   list-style: none;
-  scroll-margin-top: 40px;
+  scroll-margin-top: var(--section-40);
 }
 
 .case-card__link {
@@ -225,14 +272,14 @@ a {
   height: 100%;
 }
 
-/* Місце для кейсу у вигляді кишені:
+/* Обкладинка кейсу у вигляді кишені (пропорція 2:1):
    сам блок — задня стінка, ::before — аркуш (місце для мокапу), ::after — кишеня спереду.
-   Пізніше мокап кейсу ляже на місце аркуша. */
+   12%, 12 px і 48 px нижче — частина форми кишені, а не токени. */
 .case-card__image {
   position: relative;
-  height: 160px;
-  border-radius: 20px;
-  background: var(--color-surface-strong);
+  aspect-ratio: var(--ratio-cover);
+  border-radius: var(--radius-card);
+  background: var(--color-line);
   overflow: hidden;
   transition: transform 0.2s ease;
 }
@@ -240,9 +287,9 @@ a {
 .case-card__image::before {
   content: '';
   position: absolute;
-  inset: 14px 12% 18px;
-  border-radius: 10px;
-  background: var(--color-paper);
+  inset: var(--space-16) 12%;
+  border-radius: 12px;
+  background: var(--color-canvas);
   transition: transform 0.25s ease;
 }
 
@@ -251,7 +298,7 @@ a {
   position: absolute;
   inset: auto 0 0;
   height: 55%;
-  border-radius: 44px 44px 20px 20px; /* заокруглений край кишені */
+  border-radius: 48px 48px var(--radius-card) var(--radius-card);
   background: var(--color-surface);
 }
 
@@ -261,7 +308,7 @@ a {
 }
 
 .case-card__link:hover .case-card__image::before {
-  transform: translateY(-8px);
+  transform: translateY(calc(-1 * var(--space-8)));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -272,26 +319,27 @@ a {
 }
 
 .case-card__meta {
-  padding-top: 20px;
+  padding-top: var(--space-24);
 }
 
 .case-card__title {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--font-lead-size);
+  line-height: var(--font-lead-leading);
   font-weight: 600;
 }
 
 .case-card__info {
-  margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--color-muted);
+  margin: var(--space-8) 0 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-leading);
+  color: var(--color-text-muted);
 }
 
 /* ---------- Адаптив ---------- */
 @media (max-width: 1100px) {
   .lang-switch {
-    margin-left: 24px;
+    margin-left: var(--space-24);
   }
 
   /* Фото вужче — підпис переноситься, тому без розтягування */
@@ -301,89 +349,80 @@ a {
 
   .hero__intro {
     grid-template-columns: minmax(0, 1fr) 280px;
-    gap: 56px;
+    gap: var(--section-64);
   }
 
   .hero__title {
-    font-size: 44px;
+    font-size: var(--font-display-tablet-size);
   }
 
-  /* Old Lion на всю ширину, два інші кейси — під ним */
   .hero__cases {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .case-card--featured {
-    grid-column: 1 / -1;
-  }
-
-  .case-card--featured .case-card__image {
-    height: 260px;
+    gap: var(--space-24);
   }
 }
 
 @media (max-width: 760px) {
   .site-header {
     flex-wrap: wrap;
-    padding-top: 24px;
-    row-gap: 16px;
+    padding-top: var(--space-24);
+    row-gap: var(--space-16);
   }
 
   .site-header__name {
-    font-size: 24px;
+    font-size: var(--font-nav-size);
+    line-height: var(--font-nav-leading);
   }
 
   .site-nav,
   .lang-switch {
-    font-size: 18px;
+    font-size: var(--font-body-size);
   }
 
   .site-nav {
-    gap: 20px;
+    gap: var(--space-16);
+  }
+
+  /* меню й EN / DE — в одному рядку, перемикач притиснутий праворуч */
+  .lang-switch {
+    margin-left: auto;
   }
 
   .hero {
-    padding-top: 64px;
-    padding-bottom: 80px;
+    padding-top: var(--section-48);
+    padding-bottom: var(--section-80);
   }
 
   /* На телефоні фото — над текстом, невелике */
   .hero__intro {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: var(--section-40);
   }
 
-  /* На телефоні фото з підписом — над заголовком */
   .hero__figure {
     order: -1;
   }
 
   .hero__photo {
-    flex: none;
-    align-self: start;
-    width: 200px;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 300 / 360;
-    border-radius: 24px;
+    width: 200px; /* 200 × 240, 5:6 */
   }
 
   .hero__title {
-    font-size: 36px;
+    font-size: var(--font-heading-size);
   }
 
   .hero__path {
-    font-size: 16px;
-    margin-top: 16px;
+    font-size: var(--font-button-size);
+    margin-top: var(--space-16);
   }
 
   .hero__lead {
-    margin-top: 24px;
-    font-size: 17px;
+    margin-top: var(--space-24);
+    font-size: var(--font-body-size);
+    line-height: var(--font-body-leading);
   }
 
   .hero__actions {
-    padding-top: 40px;
+    padding-top: var(--section-40);
   }
 
   .button {
@@ -391,14 +430,10 @@ a {
     min-width: 0;
   }
 
+  /* На телефоні відступ перед кейсами не більший, ніж на комп'ютері */
   .hero__cases {
     grid-template-columns: 1fr;
-    margin-top: 80px;
-    gap: 48px;
-  }
-
-  .case-card__image,
-  .case-card--featured .case-card__image {
-    height: 220px;
+    margin-top: var(--section-48);
+    gap: var(--section-48);
   }
 }
